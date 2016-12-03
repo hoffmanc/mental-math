@@ -79,7 +79,7 @@ class Equation extends Component {
     }
     if (correctAnswer === answer) {
       this.setState(this.reset());
-      this.props.correctAnswer(this.state.operand1, this.state.operand2, answer);
+      this.props.correctAnswer(this.state.operand1, this.state.operator, this.state.operand2, answer);
     } else {
       this.setState({answer: event.target.value});
     }

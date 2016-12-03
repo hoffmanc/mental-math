@@ -18,13 +18,14 @@ class App extends Component {
     this.time = time;
   }
 
-  handleCorrectAnswer = (operand1, operand2, answer) => {
+  handleCorrectAnswer = (operand1, operator, operand2, answer) => {
     this.setState(function(prevState, props) {
       let lastEntry = prevState.logEntries[0]
       let lastTime = lastEntry === undefined ? 0 : lastEntry.time;
       let timeTaken = this.time - lastTime;
       let newEntry = {
         operand1: operand1,
+        operator: operator,
         operand2: operand2,
         answer: answer,
         time: this.time,
