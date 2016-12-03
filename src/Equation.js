@@ -52,7 +52,7 @@ class Equation extends Component {
   }
 
   getOperand() {
-    let min = 2
+    let min = 4
     let max = 15
     return Math.floor(Math.random() * (max - min)) + min;
   }
