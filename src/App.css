@@ -1,0 +1,27 @@
+.App {
+  margin: 0 5em;
+}
+
+li {
+  list-style-type: none;
+}
+
+li em {
+  display: block;
+  float: left;
+  clear: left;
+  width: 3em;
+}
+
+li em.bad {
+  color: red;
+}
+
+.operand1, .operand2, .operator {
+  width: 3em;
+  float: left;
+}
+
+.timer {
+  margin-left: 20em;
+}
