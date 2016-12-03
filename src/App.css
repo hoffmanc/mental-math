@@ -18,7 +18,9 @@ li em.bad {
 }
 
 .operand1, .operand2, .operator {
-  width: 3em;
+  width: 1em;
+  text-align: right;
+  margin-right: 1em;
   float: left;
 }
 

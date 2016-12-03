@@ -9,7 +9,11 @@ class LogEntries extends Component {
         <em className={entry.timeTaken > 5 ? "bad" : ""}>
           {entry.timeTaken}s:
         </em>
-        {entry.operand1} * {entry.operand2} = {entry.answer}
+        <div className="operand1">{entry.operand1}</div>
+        <div className="operator">*</div>
+        <div className="operand2">{entry.operand2}</div>
+        =
+        {entry.answer}
       </li>
     )
     return (
