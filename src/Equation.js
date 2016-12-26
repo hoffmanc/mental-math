@@ -1,10 +1,11 @@
 var _ = require("underscore")
 import React, { Component } from 'react';
+import Multiplication from './Multiplication.js';
+import Division from './Division.js';
 
 class Equation extends Component {
   constructor(props) { 
     super(props);
-    this.operandSets = [];
     this.state = this.reset();
   }
 
@@ -22,44 +23,10 @@ class Equation extends Component {
     );
   }
 
-  getOperands(operation) {
-    let operands = null;
-    do {
-      switch(operation) {
-        case "/":
-          let numerator = null;
-          let denominator = null;
-          do{
-            numerator = this.getOperand();
-            denominator = this.getOperand();
-          }while((numerator % denominator !== 0) || (numerator === denominator))
-          operands = [numerator, denominator];
-          break;
-        default:
-          operands = [this.getOperand(), this.getOperand()];
-      }
-    }while(this.operandsAlreadyUsed(operands));
-    this.operandSets.push(operands);
-    return operands;
-  }
-
-  operandsAlreadyUsed(operands) {
-    _.some(this.operandSets, (operandSet) => {
-      let intersection = _.intersection(operandSet, operands);
-      console.log(operandSet);
-      return intersection.length === 2;
-    })
-  }
-
-  getOperand() {
-    let min = 4
-    let max = 15
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
   reset() {
-    let operator = _.sample(["*","/"])
-    let operands = this.getOperands(operator)
+    this.equation = _.sample([new Multiplication(), new Division()]);
+    let operands = this.equation.getOperands();
+    let operator = this.equation.operator;
     return { 
       operand1: operands[0],
       operator: operator,
@@ -68,16 +35,9 @@ class Equation extends Component {
     };
   }
 
-
   checkAnswer = (event) => {
     let answer = parseInt(event.target.value, 10);
-    let correctAnswer = null
-    if(this.state.operator === "*") {
-      correctAnswer = this.state.operand1 * this.state.operand2
-    } else {
-      correctAnswer = this.state.operand1 / this.state.operand2
-    }
-    if (correctAnswer === answer) {
+    if(answer === this.equation.correctAnswer()) {
       this.setState(this.reset());
       this.props.correctAnswer(this.state.operand1, this.state.operator, this.state.operand2, answer);
     } else {
